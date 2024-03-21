@@ -1,0 +1,10 @@
+apiVersion: krishnadutt.github.io/v1
+kind: preemptivePodScalar
+metadata:
+  name: my-cron-pod-scalar
+  namespace: default
+spec:
+  cronSpec: "0 * * * *"
+  selector: "app=nginx"
+  minNumberPods: 3
+  duration: 60

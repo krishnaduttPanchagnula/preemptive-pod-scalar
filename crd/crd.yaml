@@ -1,0 +1,51 @@
+#CRD
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: preemptivepodscalars.krishnadutt.github.io
+spec:
+  group: krishnadutt.github.io
+  scope: Namespaced
+  names:
+    plural: preemptivepodscalars
+    kind: preemptivePodScalar
+    singular: preemptivepodscalar
+    shortNames:
+    - pps
+  versions:
+  - additionalPrinterColumns:
+    - description:
+      jsonPath: .spec.fromTime
+      name: fromtime
+      type: string
+    - description: Enter the nummber of minures untill this state has to be reserved
+      jsonPath: .spec.duration
+      name: duration(min)
+      type: string
+    - description:
+      jsonPath: .spec.selector
+      name: selector
+      type: string
+    - description:
+      jsonPath: .spec.minNumberPods
+      name: min pods
+      type: integer
+    name: v1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              fromTime:
+                type: string
+              duration:
+                type: integer
+              selector:
+                type: string
+              minNumberPods:
+                type: integer
+
